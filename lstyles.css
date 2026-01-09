@@ -1,0 +1,72 @@
+.custom-navbar {
+  background-color: brown;
+}
+
+
+.custom-brand {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #ffffff !important;
+}
+
+
+.custom-link {
+  color: beige!important;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+
+.custom-link:hover {
+  color: rgb(165, 206, 159) !important;
+ 
+}
+
+
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.5);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+.login-section{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:  rgb(168, 166, 163);
+}
+
+.login-form {
+    background-color: white;
+    padding:30px;
+    border-radius: 10px;
+    box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width:400px;
+}
+
+.login-form h2{
+    margin-bottom:30px;
+    color:#333;
+    text-align: center;
+}
+
+.login-form .form-control{
+    margin-bottom:20px;
+}
+
+.login-form .btn-primary{
+    width: 100%;
+    margin-bottom: 10px;
+    padding:5px;
+    font-size: 1rem;
+}
+
+.login-form .btn-outline-secondary{
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+}
