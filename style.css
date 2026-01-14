@@ -58,4 +58,104 @@
   border-radius: 5px;
 }
 
+.page { display: none; }
 
+.page.active { display: block; }
+
+body.not-authenticated .role-logged-in { display: none; }
+
+body.authenticated .role-logged-out { display: none; }
+
+/* Hide admin items by default */
+.role-admin { 
+    display: none !important; 
+}
+
+/* Show admin items when user is admin - specifically for dropdown menu list items */
+body.is-admin .dropdown-menu li.role-admin,
+body.is-admin .dropdown-menu .role-admin,
+body.is-admin ul li.role-admin,
+body.is-admin li.role-admin {
+    display: list-item !important; 
+    visibility: visible !important;
+}
+
+/* For non-list items with role-admin */
+body.is-admin .role-admin:not(li) { 
+    display: block !important; 
+}
+
+/* Content Sections */
+.content-section {
+    min-height: calc(100vh - 56px);
+    padding: 30px 0;
+    background-color: #f8f9fa;
+}
+
+.content-section h2 {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.content-section .card {
+    border: none;
+    border-radius: 8px;
+}
+
+.content-section .card-body {
+    background-color: #ffffff;
+}
+
+/* Profile Section Specific Styling */
+#profile .card-body h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+#profile .form-label {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+#profile .form-label + p {
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 6px;
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.text-danger {
+    color: #dc3545 !important;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: #fee;
+    color: #c82333 !important;
+}
+
+#addEmployeeBtn.btn.btn-primary.btn-sm{
+    float: inline-end;
+}
+
+button.btn.btn-primary {
+    float: inline-end;
+}

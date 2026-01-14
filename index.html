@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
+<body class="not-authenticated">
 
     <nav class="navbar navbar-expand-lg custom-navbar">
         <div class="container">
-            <a class="navbar-brand custom-brand" href="#">Full-Stack App</a>
+            <a class="navbar-brand custom-brand" href="#" id="homeLink">Full-Stack App</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -20,20 +20,35 @@
 
             <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
+                        <li class="nav-item role-logged-out">
                          <a class="nav-link custom-link" href="login.html">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item role-logged-out">
                             <a class="nav-link custom-link" href="register.html">Register</a>
                         </li>
+
+                        <li class="nav-item dropdown role-logged-in">
+                            <a class="nav-link dropdown-toggle custom-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span id="usernameDisplay">User</span>
+                            </a>
+                           <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-section="profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" data-section="employees">Employees</a></li>
+                            <li><a class="dropdown-item" href="#" data-section="accounts">Accounts</a></li>
+                            <li><a class="dropdown-item" href="#" data-section="departments">Departments</a></li>
+                            <li><a class="dropdown-item" href="#" data-section="requests">My Requests</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                        </li>
                     </ul>
-               
+        
             </div>
 
         </div>
     </nav>
 
-       <section id="home" class="home-section py5">
+       <section id="home" class="content-section home-section py5">
         <div class="container">
             <h1 class="display-5 mb-2">Welcome to Full-Stack App</h1>
 
@@ -52,12 +67,11 @@
                 <strong>Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset
             </div>
 
-            <a href="#get-started" class="btn btn-primary mt-4">Get Started →</a>
+            <a href="login.html" class="btn btn-primary mt-4">Get Started →</a>
         </div>
        </section>
 
-        
-      
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
