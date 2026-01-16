@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard | Full-Stack App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="not-authenticated">
+    
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container">
+            <a class="navbar-brand custom-brand" href="index.html">Full-Stack App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown role-logged-in">
+                        <a class="nav-link dropdown-toggle custom-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span id="usernameDisplay">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" data-section="profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="#" data-section="requests">My Requests</a></li>
+                            <li><a class="dropdown-item text-danger" href="#" id="logoutBtn">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  
+    <section id="profile" class="content-section">
+        <div class="container my-5">
+            <h2 class="mb-4">My Profile</h2>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <h4 id="profileFullName">-</h4>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Email:</strong></label>
+                        <p id="profileEmailDisplay" class="mb-0">-</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Role:</strong></label>
+                        <p id="profileRoleDisplay" class="mb-0">-</p>
+                    </div>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="profileForm">
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" value="user@example.com">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-control" autocomplete="new">
+                        </div>
+
+                    </form>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="submit" form="profileForm" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+  
+    <section id="requests" class="content-section" style="display: none;">
+        <div class="container my-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold">My Item Requests</h3>
+                <button id="openRequestModal" class="btn btn-success">
+                    + Request New Item
+                </button>
+            </div>
+
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Items</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody">
+                                <tr>
+                                    <td colspan="4" class="text-center">No requests found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="requestModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request New Item</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <input type="text" class="form-control" id="requestType" value="Equipment">
+                        <div class="form-text">Enter the type of items you're requesting (e.g., Equipment, Software, Supplies)</div>
+                    </div>
+                    <label class="form-label">Items</label>
+                    <div id="itemsContainer"></div>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="addItem()">
+                        + Add Another Item
+                    </button>
+                    <div class="form-text mt-2">Click "Add Another Item" to request multiple items. Fill in all item names before submitting.</div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="submitRequest()">Submit Item Request</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteRequestModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this request?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="confirmDeleteRequestBtn">Delete</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script src="user.js"></script>
+</body>
+</html>

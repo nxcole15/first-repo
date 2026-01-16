@@ -79,6 +79,15 @@ function handleLogin(e) {
         return;
     }
 
+    // Check if account is verified
+    // For legacy users without verified property, treat as unverified
+    if (user.verified !== true) {
+        showError('Your account has not been verified yet. Please contact an administrator to verify your account.');
+        // Clear password field for security
+        document.getElementById('password').value = '';
+        return;
+    }
+
     localStorage.setItem('currentUser', JSON.stringify (user));
 
     document.body.classList.remove
@@ -93,7 +102,12 @@ function handleLogin(e) {
 
     alert('Login successful!');
   
-    window.location.href = 'admin.html';
+    // Redirect based on user role
+    if (user.role === 'admin') {
+        window.location.href = 'admin.html';
+    } else {
+        window.location.href = 'user.html';
+    }
 }
 
 
@@ -137,14 +151,15 @@ function handleRegister(e) {
         lastName: lastName,
         email: email,
         password: password,
-        role: 'user'
+        role: 'user',
+        verified: false  // New users are not verified by default
     };
 
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify (users));
 
     
-    alert('Registration successful! Redirecting to login page.');
+    alert('Registration successful! Your account is pending verification. Please contact an administrator to verify your account. Redirecting to login page.');
     window.location.href = 'login.html';
 }
 
@@ -184,7 +199,8 @@ function createDefaultAdmin() {
             lastName: 'User',
             email: 'admin@example.com',
             password: 'admin123',
-            role: 'admin'
+            role: 'admin',
+            verified: true  // Admin account is verified by default
         };
         users.push(adminUser);
         localStorage.setItem('users', JSON.stringify(users));

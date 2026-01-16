@@ -122,18 +122,39 @@
                                 </tr>
                             </thead>
                             <tbody id="employeesTableBody">
-                                <td colspan="4" class="text-center">No accounts found</td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary me-1" onclick="editEmployee(this)">Edit</button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteEmployee(this)">Delete</button>
-                                </td>
+                                <tr>
+                                    <td colspan="5" class="text-center">No employees found</td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+        <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+
+        <div class="modal-header">
+            <h5 class="modal-title">Confirm Delete</h5>
+            <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+            Are you sure you want to delete this employee?
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+
+        </div>
+    </div>
+    </div>
+
 
     <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
@@ -149,27 +170,32 @@
                         
                         <div class="mb-3">
                             <label class="form-label">Employee ID</label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="employeeId" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" id="employeeName" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">User Email</label>
-                            <input type="email" class="form-control">
+                            <input type="email" id="employeeEmail" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Position</label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="employeePosition" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Department</label>
-                            <input type="text" class="form-control" value="">
+                            <input type="text" id="employeeDepartment" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Hiring Date</label>
-                            <input type="date" class="form-control">
+                            <input type="date" id="employeeHiringDate" class="form-control">
                         </div>
 
                     </form>
@@ -230,35 +256,35 @@
 
                         <div class="mb-3">
                             <label class="form-label">First Name</label>
-                            <input type="text" name="firstName" class="form-control">
+                            <input type="text" id="accountFirstName" name="firstName" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Last Name</label>
-                            <input type="text" name="lastName" class="form-control">
+                            <input type="text" id="accountLastName" name="lastName" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control">
+                            <input type="email" id="accountEmail" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" autocomplete="new-password">
+                            <input type="password" id="accountPassword" class="form-control" autocomplete="new-password">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Role</label>
-                            <select class="form-select">
+                            <select id="accountRole" class="form-select">
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>
 
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="verified">
-                            <label class="form-check-label" for="verified">
+                            <input class="form-check-input" type="checkbox" id="accountVerified">
+                            <label class="form-check-label" for="accountVerified">
                                 Verified
                             </label>
                         </div>
@@ -320,12 +346,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="departmentName" class="form-control">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <input type="text" class="form-control">
+                            <input type="text" id="departmentDescription" class="form-control">
                         </div>
 
                     </form>
@@ -340,62 +366,149 @@
         </div>
     </div>
 
+    <div class="modal fade" id="deleteDepartmentModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this department?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="confirmDeleteDepartmentBtn">Delete</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this account?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="confirmDeleteAccountBtn">Delete</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="resetPasswordForm">
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input type="password" id="newPassword" class="form-control" autocomplete="new-password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-control" autocomplete="new-password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="resetPasswordForm" class="btn btn-primary">Reset Password</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- My Requests Section -->
     <section id="requests" class="content-section" style="display: none;">
-  <div class="container my-5">
+        <div class="container my-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-bold" id="requestsSectionTitle">My Requests</h3>
+                <button id="openRequestModal" class="btn btn-success">
+                    + New Request
+                </button>
+            </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h3 class="fw-bold">My Requests</h3>
-      <button id="openRequestModal" class="btn btn-success">
-        + New Request
-      </button>
-    </div>
-
-    <div class="card shadow-sm">
-      <div class="card-body text-center py-5">
-        <p class="text-muted mb-3">You have no requests yet.</p>
-        <button id="openRequestModal2" class="btn btn-success">
-          Create One
-        </button>
-      </div>
-    </div>
-
-  </div>
-</section>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Items</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTableBody">
+                                <tr>
+                                    <td colspan="4" class="text-center">No requests found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <div class="modal fade" id="requestModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title">New Request</h5>
-        <button class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-
-        <div class="mb-3">
-          <label class="form-label">Type</label>
-          <input type="text" class="form-control" id="requestType" value="Equipment">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Request</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Type</label>
+                        <input type="text" class="form-control" id="requestType" value="Equipment">
+                        <div class="form-text">Enter the type of items you're requesting (e.g., Equipment, Software, Supplies)</div>
+                    </div>
+                    <label class="form-label">Items</label>
+                    <div id="itemsContainer"></div>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="addItem()">
+                        + Add Another Item
+                    </button>
+                    <div class="form-text mt-2">Click "Add Another Item" to request multiple items. Fill in all item names before submitting.</div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="submitRequest()">Submit Request</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
         </div>
-
-        <label class="form-label">Items</label>
-        <div id="itemsContainer"></div>
-
-        <button class="btn btn-sm btn-outline-primary mt-2" onclick="addItem()">
-          + Add Item
-        </button>
-
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-primary" onclick="submitRequest()">Submit Request</button>
-      </div>
-
     </div>
-  </div>
-</div>
+
+    <div class="modal fade" id="deleteRequestModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Delete</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this request?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="confirmDeleteRequestBtn">Delete</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
